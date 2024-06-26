@@ -13,8 +13,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.blue[100],
         appBar: AppBar(
           title: Text('Home Screen'),
+          backgroundColor: Colors.blue[200],
           actions: [
             IconButton(
               onPressed: () => controller.logOut(),
@@ -33,10 +35,13 @@ class HomeScreen extends StatelessWidget {
               return Text('Loading...');
             }
 
-            return ListView(
-              children: snapshot.data!.docs
-                  .map<Widget>((e) => buildUserListItem(e))
-                  .toList(),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView(
+                children: snapshot.data!.docs
+                    .map<Widget>((e) => buildUserListItem(e))
+                    .toList(),
+              ),
             );
           },
         ),
@@ -53,19 +58,23 @@ class HomeScreen extends StatelessWidget {
 
     String name = data['Name'] ?? 'No Name';
     String email = data['Email'] ?? 'No Email';
-    String receiverId = document.id; // Assuming the document ID is the user's ID
+    String receiverId = document.id;
 
     /// Display all users except current user
     if (FirebaseAuth.instance.currentUser?.email != email) {
-      return ListTile(
-        title: Text(name),
-        subtitle: Text(email),
-        onTap: () {
-          Get.to(() => ChatScreen(
-            receiverId: receiverId,
-            receiverName: name,
-          ));
-        },
+      return Container(
+        color: Colors.lightBlue[200],
+        margin: EdgeInsets.symmetric(vertical: 4.0),
+        child: ListTile(
+          title: Text(name),
+          subtitle: Text(email),
+          onTap: () {
+            Get.to(() => ChatScreen(
+              receiverId: receiverId,
+              receiverName: name,
+            ));
+          },
+        ),
       );
     } else {
       return Container();

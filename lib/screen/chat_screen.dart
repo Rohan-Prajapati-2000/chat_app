@@ -24,11 +24,13 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageController = TextEditingController();
   final ChatService chatService = ChatService();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final ScrollController _scrollController = ScrollController();
 
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
       await chatService.sendMessage(widget.receiverId, messageController.text);
       messageController.clear();
+      scrollToBottom();
     }
   }
 
@@ -76,6 +78,20 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollToBottom();
+    });
+  }
+
+  void scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -106,7 +122,11 @@ class _ChatScreenState extends State<ChatScreen> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         }
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          scrollToBottom();
+        });
         return ListView(
+          controller: _scrollController,
           children: snapshot.data!.docs
               .map((e) => buildMessageItem(e))
               .toList(),
