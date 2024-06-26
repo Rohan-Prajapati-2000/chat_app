@@ -1,16 +1,16 @@
 # chat_app
 
-A new Flutter project.
+# How to run this application in your system
 
-## Getting Started
+Step-1 => Go pubspec.yaml file and implement all dependencies.<br>
+Step-2 => Open your terminal and run => flutter run --multidex.<br>
+Step-3 => Now you can connect you phone or you can run in emulator by clicking run button.<br>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+If you are not able to run this application then you can directly download this application by below link
+https://drive.google.com/file/d/1puPV8df3TwgAZ1LCVH6QwCojk5uQy6Y6/view?usp=sharing
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Thanks!!<br>
+<br>
+**Rohan Prajapati**<br>
++91 **7238073325**<br>
